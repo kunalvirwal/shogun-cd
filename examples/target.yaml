@@ -1,0 +1,8 @@
+apiVersion: shogun.dev/v1
+kind: Target
+metadata:
+    name: prod-api
+spec:
+    host: prod1.example.com
+    user: ubuntu
+    ssh-key-secret: ${prod1-ssh-key}

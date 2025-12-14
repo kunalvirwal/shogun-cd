@@ -1,0 +1,12 @@
+package pipeline
+
+type MutateStep struct {
+	TriggerWhen string `yaml:"trigger_when,omitempty"`
+	File        string `yaml:"file"`
+	UpdateField string `yaml:"update_field"`
+	Value       string `yaml:"value"`
+}
+
+func (*MutateStep) Type() string {
+	return MutateType
+}

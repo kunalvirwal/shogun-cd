@@ -1,0 +1,39 @@
+# webhook activated
+apiVersion: shogun.dev/v1
+kind: Pipeline
+metadata:
+    name: deploy-api
+spec:
+    triggers:
+        - type: "ci_webhook"
+        - type: "git_changes"
+          paths: ["services/api/**"]
+
+    steps:
+        # mutates the field and make a commit
+        - mutate:
+              trigger_when: ci_webhook # or git_changes
+              file: services/api/compose.yml
+              update_field: services.api.image
+              value: ${IMAGE} # from webhook
+
+        # replaces the old instance of a file or dir with the new one on Github
+        - sync:
+              target: prod1
+              files:
+                  - dst: "~/api/docker-compose.yaml" # on server
+                    source: "services/api/compose.yml" # in repo
+
+        # execs the commands on the server
+        - exec:
+              target: prod1
+              commands:
+                  - "cd ~/api/"
+                  - "docker compose up -d"
+
+        # specifically for kubernetes targets
+        - apply:
+              target: cluster1
+              files:
+                  - "services/api/compose.yml"
+                  - "..."
