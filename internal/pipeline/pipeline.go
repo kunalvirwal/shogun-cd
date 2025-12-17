@@ -1,5 +1,7 @@
 package pipeline
 
+import pipelineSteps "github.com/kunalvirwal/shogun-cd/internal/pipeline/steps"
+
 type Kind string
 
 const PipelineKind Kind = "Pipeline"
@@ -16,8 +18,8 @@ type Metadata struct {
 }
 
 type Spec struct {
-	Triggers []Trigger     `yaml:"triggers"`
-	Steps    []StepWrapper `yaml:"steps"`
+	Triggers []Trigger                   `yaml:"triggers"`
+	Steps    []pipelineSteps.StepWrapper `yaml:"steps"`
 }
 
 type Trigger struct {

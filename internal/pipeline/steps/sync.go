@@ -1,4 +1,6 @@
-package pipeline
+package pipelineSteps
+
+// ExecSteps are only valid for target type server
 
 type SyncStep struct {
 	TriggerWhen string       `yaml:"trigger_when,omitempty"`

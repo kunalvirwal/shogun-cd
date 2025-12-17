@@ -1,29 +1,23 @@
-package pipeline
+package pipelineSteps
 
 import (
 	"fmt"
-	"os"
 
 	"go.yaml.in/yaml/v3"
 )
 
-func LoadPipeline(path string) error {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return err
-	}
+const (
+	MutateType = "mutate"
+	SyncType   = "sync"
+	ExecType   = "exec"
+	ApplyType  = "apply"
+)
 
-	var pipeline Pipeline
-	if err := yaml.Unmarshal(data, &pipeline); err != nil {
-		return fmt.Errorf("failed to unmarshal pipeline YAML: %v", err)
-	}
-
-	// [TODO]: Validate the pipeline structure here if needed
-
-	for i, sw := range pipeline.Spec.Steps {
-		fmt.Printf("Step %d: Type=%s, Details=%+v\n", i+1, sw.Step.Type(), sw.Step)
-	}
-	return nil
+type StepWrapper struct {
+	Step Step
+}
+type Step interface {
+	Type() string
 }
 
 // UnmarshalYAML is an interface hook for custom unmarshaling of StepWrapper

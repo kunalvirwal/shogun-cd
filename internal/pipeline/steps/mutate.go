@@ -1,4 +1,4 @@
-package pipeline
+package pipelineSteps
 
 type MutateStep struct {
 	TriggerWhen string `yaml:"trigger_when,omitempty"`

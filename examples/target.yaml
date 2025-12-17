@@ -2,7 +2,8 @@ apiVersion: shogun.dev/v1
 kind: Target
 metadata:
     name: prod-api
+    type: cluster # or server
 spec:
     host: prod1.example.com
-    user: ubuntu
-    ssh-key-secret: ${prod1-ssh-key}
+    # This secret should point to either the ssh key in case of server or the kube config in case of cluster
+    access-key-secret: prod1-ssh-key
