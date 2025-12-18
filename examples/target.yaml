@@ -5,5 +5,8 @@ metadata:
     type: cluster # or server
 spec:
     host: prod1.example.com
+    user: api
+    port: 6443
     # This secret should point to either the ssh key in case of server or the kube config in case of cluster
-    access-key-secret: prod1-ssh-key
+    access-key-secret: prod1-kube-conf
+    

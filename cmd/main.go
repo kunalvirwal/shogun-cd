@@ -17,7 +17,7 @@ func initServices() {
 
 	logger := utils.NewLogger(utils.DebugLevel, true)
 	pipelineService := pipeline.NewPipelineService(logger)
-
+	pipelineService.LoadPipeline("./examples/pipeline.yaml")
 	// Initialize main application
 	app := app.NewApp(pipelineService, logger)
 

@@ -4,7 +4,11 @@ import pipelineSteps "github.com/kunalvirwal/shogun-cd/internal/pipeline/steps"
 
 type Kind string
 
-const PipelineKind Kind = "Pipeline"
+const (
+	PipelineKind          Kind = "Pipeline"
+	WebhookTriggerKind    Kind = "ci_webhook"
+	GitChangesTriggerKind Kind = "git_changes"
+)
 
 type Pipeline struct {
 	ApiVersion string   `yaml:"apiVersion"`

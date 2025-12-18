@@ -36,4 +36,4 @@ spec:
               target: cluster1
               files:
                   - "services/api/compose.yml"
-                  - "..."
+                  - "...yaml"
